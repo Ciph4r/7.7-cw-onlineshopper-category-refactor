@@ -16,8 +16,10 @@ require('dotenv').config()
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users/usersRoutes');
 const adminRouter = require('./routes/admin/adminRoutes')
+const productRouter = require('./routes/admin/products/productRoute')
 const { cookie } = require('express-validator');
-
+const Catagory = require('./routes/admin/catagories/models/Catagory');
+const getAllCategories = require('./routes/admin/catagories/middleware/getAllCategories')
 const app = express();
 
 
@@ -44,7 +46,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverrride('_method'))
+app.use(getAllCategories)
 
+
+
+ 
 app.use(session({
   resave:true,
   saveUninitialized:true,
@@ -70,8 +76,8 @@ app.use((req,res,next) => {
 
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
-app.use('/api/admin/', adminRouter);
-
+app.use('/api/admin', adminRouter);
+app.use('/api/products', productRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

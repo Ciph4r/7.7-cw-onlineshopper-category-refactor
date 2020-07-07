@@ -88,6 +88,7 @@ module.exports = {
     // },
     updateProfile : (params , id) => {
         return new Promise ((resolve , reject) => {
+
             User.findById(id).then((user) => {
 
                 if (params.name) user.profile.name = params.name
@@ -102,6 +103,7 @@ module.exports = {
                 .catch((err)=> reject(err))
               })
               .catch((err)=> reject(err))
+              
         })
     },
 
