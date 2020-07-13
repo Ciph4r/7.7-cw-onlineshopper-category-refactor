@@ -17,6 +17,8 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users/usersRoutes');
 const adminRouter = require('./routes/admin/adminRoutes')
 const productRouter = require('./routes/admin/products/productRoute')
+const cartRouter = require('./routes/cart/cartRoute')
+const cartMiddleware = require('./routes/cart/middleware/middleware')
 const { cookie } = require('express-validator');
 const Catagory = require('./routes/admin/catagories/models/Catagory');
 const getAllCategories = require('./routes/admin/catagories/middleware/getAllCategories')
@@ -74,10 +76,13 @@ app.use((req,res,next) => {
   next()
 })
 
+
+app.use(cartMiddleware)
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/products', productRouter);
+app.use('/api/cart' , cartRouter)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

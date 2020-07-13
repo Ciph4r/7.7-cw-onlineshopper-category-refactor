@@ -9,7 +9,11 @@ router.get('/all-products/:id' , (req,res,next) => {
     })
 })
 
-
+router.get('/single-product/:id' , (req,res) => {
+    Product.findById({_id : req.params.id}).then((foundProduct) => {
+        return res.render('main/single-product' , {product: foundProduct})
+    })
+})
 
 
 module.exports = router

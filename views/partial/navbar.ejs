@@ -38,7 +38,7 @@
               <ul>
                 <% for( let  i = 0;  i < categories.length;  i++ ) { %>
                   <li style="list-style: none;">
-                    <a href="" class="nav-category-list" style="color: black; text-decoration: none;" > 
+                    <a href="/api/products/all-products/<%= categories[i]._id %> " class="nav-category-list" style="color: black; text-decoration: none;" > 
                     <%= categories[i].name %> 
                     </a>
                   </li>
@@ -70,7 +70,18 @@
    
 
       <% } else { %> <span style="color:white">
-         Hello &nbsp; <a href="/api/users/profile">        <%= user.profile.name.toUpperCase() %> </a> &nbsp &nbsp;</span>
+         Hello &nbsp; <a href="/api/users/profile">       <%= user.profile.name.toUpperCase() %> </a> &nbsp &nbsp;</span>
+
+         <span  style=" margin: 0 10px" >
+          <a href="/api/cart">
+          <span style="color: green;" class="fa-stack has-badge" data-count = "<%= cartTotal %> ">
+            <i style="font-size: 1.1em;" class="fa fa-shopping-cart"></i>
+            <span style="padding-left: 5px" ><%= cartTotal %> </span>
+          </span>
+          </a>
+        
+        </span>
+
        <span class="myNavLogout">
          <a style="color: biege;" href="/api/users/logout">Logout </a>
       </span>

@@ -7,13 +7,16 @@ const passport = require('passport');
 const { json } = require('express');
 const { check , validationResult } = require('express-validator');
 /* GET users listing. */
-
+const { createUserCart} = require("../cart/controllers/cartController")
 // const isAuth = (req , res,next) => {
 //   if (req.user){
 //     res.redirect(301,'/api/users')
 //   }
 //   next()
 // }
+
+
+
 
 router.get('/', function(req, res, next) {
 
@@ -34,7 +37,7 @@ router.get('/profile' ,  (req,res)=> {
  return res.send('Unauthorized')
 })
 
-router.post('/register' , userValidation , register)
+router.post('/register' , userValidation , register , createUserCart)
 
 
 router.get('/login' ,  (req,res,next) => {
@@ -44,11 +47,25 @@ router.get('/login' ,  (req,res,next) => {
   return res.render('auth/login')
 })
 
-router.get('/logout' , (req,res) => {
-  req.session.destroy()
-  req.logout()
-  return res.redirect('/api/users/login')
-})
+// router.get('/logout' , (req,res) => {
+//   req.session.destroy()
+//   req.logout()
+//   return res.redirect('/api/users/login')
+// })
+
+router.get('/logout', (req, res) => {
+  console.log('logout', req.session.cookie);
+  // req.logout();
+  res.clearCookie('connect.sid', {
+    path: '/',
+    httpOnly: true,
+    secure: false,
+    maxAge: null
+  });
+  req.session.destroy();
+  // console.log('cookie', req.session);
+  return res.redirect('/api/users/login');
+});
 
 
    const checkInput= [

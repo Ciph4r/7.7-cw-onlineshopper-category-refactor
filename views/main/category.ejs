@@ -28,14 +28,14 @@
                         <% for( let i = 0; i < 24; i++ ) { %>
                             <div class="col-md-4" style="margin-bottom: 30px;">
                                 <div class="card" style="width: 20rem;">
-                                    <a href="" style="text-decoration: none;">
+                                    <a href="/api/products/single-product/<%= products[i]._id %>" style="text-decoration: none;">
                                     <img class="card-img-top" src="<%= products[i].image %> "/>
                                     </a>
                                     <div class="card-body">
                                         <h5 class="card-title"> <%= products[i].name %> </h5>
                                         <p class="card-text"> $<%= products[i].price %> </p>
                                         <br/>
-                                        <a href="" class="btn btn-success"> Buy Now</a>
+                                        <a href=" " class="btn btn-success"> Buy Now</a>
                                     </div>
                                 </div>
 

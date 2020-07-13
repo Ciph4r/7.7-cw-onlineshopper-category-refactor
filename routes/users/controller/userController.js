@@ -33,7 +33,8 @@ module.exports = {
                 if (err) {
                     return res.status(400).json({comfrim: 'false' , msg: err})
                 }else {
-                    res.redirect(301,'/api/users')
+                    // res.redirect(301,'/api/users')
+                    next()
                 }
             })
          
